@@ -9,10 +9,12 @@ import nltk #natural language toolkit it us used for computer to process the nat
 #wordnet is large english langugae database
 from nltk.stem import WordNetLemmatizer # Lemmatizer is used to understand the natural word in root form.(i/p="running" rootform ="run",...)
 
+nltk.download('punkt')
+nltk.download('wordnet')
 lemmatizer = WordNetLemmatizer() #to initialize the wordenet Lemmatizer
 
 #reading the json file we created as "intents.json"
-intents = json.loads(open("intents.json").read()) 
+intents = json.loads(open('bot/intents.json').read()) 
 
 #initializing list for words , docs and characters
 words = []
@@ -71,4 +73,11 @@ model.add(tf.keras.layers.Dense(128, input_shape = (len(trainX[0]),),activation 
 model.add(tf.keras.layers.Dropout(0.5)) #it will set the inputs to 0 for the 50% input
 model.add(tf.keras.layers.Dense(64 , activation = 'relu'))
 
-model.add(tf.keras.layers.Dense(len(trainY[0]),activation ='softmax'))
+model.add(tf.keras.layers.Dense(len(trainY[0]),activation ='softmax')) 
+
+sgd = tf.keras.optimizers.SGD(learning_rate=0.01, momentum = 0.9, nesterov= True)
+
+model.compile(loss= 'categorical_crossentropy', optimizer = sgd, metrics=['accuracy'])
+hist = model.fit(np.array(trainX),np.array(trainY), epochs = 200, batch_size = 5, verbose = 1)
+model.save('chatbot_forbeginner.h5',hist)
+print("Executed")
