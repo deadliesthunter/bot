@@ -15,8 +15,13 @@
      "context": [""]
     },
     {"tag": "query",
-     "patterns": ["What is Simplilearn?"],
-     "responses": ["Simplilearn is the popular online Bootcamp & online courses learning platform "],
+     "patterns": ["What is life"],
+     "responses": ["not that philosophical"],
      "context": [""]
-    } 
+    },
+    {"tag": "social media",
+    "patterns": ["How to open twitter account"],
+    "responses": ["You'll need google account first"],
+    "context": [""]
+   } 
 ]}
